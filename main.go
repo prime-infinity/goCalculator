@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"strconv"
 	"strings"
 )
 
@@ -15,6 +16,18 @@ func readString(message string, r *bufio.Reader) (string, error) {
 
 func main() {
 	reader := bufio.NewReader(os.Stdin)
-	number, _ := readString("enter a number", reader)
-	fmt.Println(number)
+	n, err := readString("enter fitst number: ", reader)
+
+	if err != nil {
+		fmt.Println("there was a fatal problem")
+		os.Exit(3)
+	}
+
+	nn, err2 := strconv.ParseFloat(n, 64)
+
+	if err2 != nil {
+		fmt.Println("The value must be a number")
+	}
+
+	fmt.Println(nn)
 }
