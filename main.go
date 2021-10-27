@@ -8,13 +8,7 @@ import (
 	"strings"
 )
 
-func readString(message string, r *bufio.Reader) (string, error) {
-	fmt.Print(message)
-	number, err := r.ReadString('\n')
-	return strings.TrimSpace(number), err
-}
-
-func main() {
+func prompt() {
 	reader := bufio.NewReader(os.Stdin)
 	n, err := readString("enter fitst number: ", reader)
 
@@ -27,7 +21,21 @@ func main() {
 
 	if err2 != nil {
 		fmt.Println("The value must be a number")
+		prompt()
+	} else {
+		fmt.Println(nn)
 	}
 
-	fmt.Println(nn)
+}
+
+func readString(message string, r *bufio.Reader) (string, error) {
+	fmt.Print(message)
+	number, err := r.ReadString('\n')
+	return strings.TrimSpace(number), err
+}
+
+func main() {
+
+	prompt()
+
 }
