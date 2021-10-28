@@ -10,6 +10,8 @@ import (
 
 //the numbers that are to be entered, stored as slice
 var numbers = []float64{}
+var operation string
+var counter int = 0 //counter to count the operation
 
 func enterOperation() {
 
@@ -23,13 +25,21 @@ func enterOperation() {
 
 	switch o {
 	case "+":
-		fmt.Println("you chose addition")
+		operation = "+"
+		prompt()
+		//fmt.Println("you chose addition")
 	case "-":
-		fmt.Println("you chose subtraction")
+		operation = "-"
+		prompt()
+		//fmt.Println("you chose subtraction")
 	case "*":
-		fmt.Println("you chose multiplication")
+		operation = "*"
+		prompt()
+		//fmt.Println("you chose multiplication")
 	case "/":
-		fmt.Println("you chose division")
+		operation = "/"
+		prompt()
+		//fmt.Println("you chose division")
 	default:
 		fmt.Println("your operation was not valid")
 		enterOperation()
@@ -37,8 +47,25 @@ func enterOperation() {
 }
 
 func prompt() {
+
+	counter++ //increment counter
+
+	var opTalk string
+
+	//this below part can be improved later using slice, by saving them in slice and iterating
+	switch counter {
+	case 1:
+		opTalk = "first"
+	case 2:
+		opTalk = "second"
+	case 3:
+		opTalk = "third"
+	default:
+		opTalk = "next"
+	}
+
 	reader := bufio.NewReader(os.Stdin)
-	n, err := readInput("enter fitst number: ", reader)
+	n, err := readInput("enter "+opTalk+" number: ", reader)
 
 	if err != nil {
 		fmt.Println("there was a fatal problem")
@@ -52,8 +79,13 @@ func prompt() {
 		prompt()
 	} else {
 		numbers = append(numbers, nn) //appending number to slice
-		fmt.Println(numbers)
-		enterOperation()
+
+		if len(numbers) == 1 {
+			//this is condition for first time
+			enterOperation()
+		} else {
+			//fmt.Println(numbers[0], numbers[1], operation)
+		}
 	}
 
 }
