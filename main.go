@@ -84,6 +84,19 @@ func prompt() {
 			//this is condition for first time
 			enterOperation()
 		} else {
+			switch operation {
+			case "+":
+				addOperation(numbers)
+			case "-":
+				subOperation(numbers)
+			case "/":
+				divOperation(numbers)
+			case "*":
+				mulOperation(numbers)
+			default:
+				fmt.Println("massive error")
+				os.Exit(3)
+			}
 			//fmt.Println(numbers[0], numbers[1], operation)
 		}
 	}
