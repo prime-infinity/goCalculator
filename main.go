@@ -8,6 +8,7 @@ import (
 	"strings"
 )
 
+//the numbers that are to be entered, stored as slice
 var numbers = []float64{}
 
 func enterOperation() {
@@ -50,7 +51,8 @@ func prompt() {
 		fmt.Println("The value must be a number")
 		prompt()
 	} else {
-		fmt.Println(nn)
+		numbers = append(numbers, nn) //appending number to slice
+		fmt.Println(numbers)
 		enterOperation()
 	}
 
@@ -64,7 +66,7 @@ func readInput(message string, r *bufio.Reader) (string, error) {
 
 func main() {
 
-	//prompt()
-	fmt.Printf("%T,%v", numbers, numbers)
+	prompt()
+	//fmt.Printf("%T,%v", numbers, numbers)
 
 }
