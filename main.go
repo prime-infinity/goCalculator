@@ -8,6 +8,8 @@ import (
 	"strings"
 )
 
+var numbers = []float64{}
+
 func enterOperation() {
 
 	reader := bufio.NewReader(os.Stdin)
@@ -62,6 +64,7 @@ func readInput(message string, r *bufio.Reader) (string, error) {
 
 func main() {
 
-	prompt()
+	//prompt()
+	fmt.Printf("%T,%v", numbers, numbers)
 
 }
