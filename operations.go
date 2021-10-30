@@ -28,5 +28,5 @@ func mulOperation(n []float64) {
 }
 
 func giveResults(r float64) {
-	fmt.Println(numbers, operations, results)
+	fmt.Println(numbers[0], operations[0], numbers[1], " = ", results[0])
 }
