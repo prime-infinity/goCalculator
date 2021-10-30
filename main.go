@@ -8,8 +8,11 @@ import (
 	"strings"
 )
 
-//the numbers that are to be entered, stored as slice
+//the numbers, results and opetations all stored in respective slices
 var numbers = []float64{}
+var results = []float64{}
+var operations = []string{}
+
 var operation string
 var counter int = 0 //counter to count the operation
 
