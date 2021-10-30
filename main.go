@@ -30,19 +30,15 @@ func enterOperation() {
 	case "+":
 		operation = "+"
 		prompt()
-		//fmt.Println("you chose addition")
 	case "-":
 		operation = "-"
 		prompt()
-		//fmt.Println("you chose subtraction")
 	case "*":
 		operation = "*"
 		prompt()
-		//fmt.Println("you chose multiplication")
 	case "/":
 		operation = "/"
 		prompt()
-		//fmt.Println("you chose division")
 	default:
 		fmt.Println("your operation was not valid")
 		enterOperation()
@@ -89,12 +85,16 @@ func prompt() {
 		} else {
 			switch operation {
 			case "+":
+				operations = append(operations, operation) //push this operation into array
 				addOperation(numbers)
 			case "-":
+				operations = append(operations, operation)
 				subOperation(numbers)
 			case "/":
+				operations = append(operations, operation)
 				divOperation(numbers)
 			case "*":
+				operations = append(operations, operation)
 				mulOperation(numbers)
 			default:
 				fmt.Println("massive error")
