@@ -40,16 +40,20 @@ func giveResults(r float64) {
 
 func performNext() {
 	reader := bufio.NewReader(os.Stdin)
-	o, err := readInput("press A and to perform another calculation, press H for history: ", reader)
+	o, err := readInput("press X to perform calculation on result, A to perform another calculation, press H for calculation history: ", reader)
 	if err != nil {
 		fmt.Println("there was a fatal problem")
 		os.Exit(3)
 	}
 	switch o {
-	case "A":
+	case "X", "x":
+		fmt.Println("you are performing calculation on result")
+	case "A", "a":
 		fmt.Println("you are performing another calculation")
-	case "H":
-		fmt.Println("you are looking for history")
+		counter = 0 //make counter 0 again
+		prompt()
+	case "H", "h":
+		fmt.Println("you are looking for history not available yet")
 	default:
 		fmt.Println("enter a valid answer")
 		performNext()
