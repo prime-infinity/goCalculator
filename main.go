@@ -82,7 +82,8 @@ func prompt() {
 		if len(numbers) == 1 {
 			//this is condition for first time
 			enterOperation()
-		} else {
+		}
+		if len(numbers) == 2 {
 			switch operation {
 			case "+":
 				operations = append(operations, operation) //push this operation into array
@@ -101,6 +102,10 @@ func prompt() {
 				os.Exit(3)
 			}
 			//fmt.Println(numbers[0], numbers[1], operation)
+		}
+
+		if len(numbers) > 2 {
+			enterOperation()
 		}
 	}
 
