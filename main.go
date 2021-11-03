@@ -42,70 +42,45 @@ func enterOperation() {
 
 func promptSecond() {
 
-	n, err := getInput("enter second number: ")
-	if err != nil {
-		fmt.Println("there was a fatal problem")
-		os.Exit(3)
-	}
-	nn, err2 := strconv.ParseFloat(n, 64)
-
-	if err2 != nil {
-		fmt.Println("The value must be a number")
-		promptFirst()
-	} else {
-		n2 = append(n2, nn)
-		fmt.Println(n1, n2, ops)
-	}
+	returnNumber := scrutInput("enter second number: ")
+	n2 = append(n2, returnNumber)
+	fmt.Println(n1, n2, ops)
 
 }
 
 func promptFirst() {
 
-	n, err := getInput("enter first number: ")
+	returnNumber := scrutInput("enter first number: ")
 
-	if err != nil {
-		fmt.Println("there was a fatal problem")
-		os.Exit(3)
-	}
+	n1 = append(n1, returnNumber)
+	enterOperation()
 
-	nn, err2 := strconv.ParseFloat(n, 64)
+	/*numbers = append(numbers, nn) //appending number to slice
 
-	if err2 != nil {
-		fmt.Println("The value must be a number")
-		promptFirst()
-	} else {
-
-		n1 = append(n1, nn)
+	if len(numbers) == 1 {
+		//this is condition for first time
 		enterOperation()
-
-		/*numbers = append(numbers, nn) //appending number to slice
-
-		if len(numbers) == 1 {
-			//this is condition for first time
-			enterOperation()
-		}
-		if len(numbers) == 2 {
-			switch operation {
-			case "+":
-				operations = append(operations, operation) //push this operation into array
-				addOperation(numbers)
-			case "-":
-				operations = append(operations, operation)
-				subOperation(numbers)
-			case "/":
-				operations = append(operations, operation)
-				divOperation(numbers)
-			case "*":
-				operations = append(operations, operation)
-				mulOperation(numbers)
-			default:
-				fmt.Println("massive error")
-				os.Exit(3)
-			}
-			//fmt.Println(numbers[0], numbers[1], operation)
-		}*/
-
 	}
+	if len(numbers) == 2 {
+		switch operation {
+		case "+":
+			operations = append(operations, operation) //push this operation into array
+			addOperation(numbers)
+		case "-":
+			operations = append(operations, operation)
+			subOperation(numbers)
+		case "/":
+			operations = append(operations, operation)
+			divOperation(numbers)
+		case "*":
+			operations = append(operations, operation)
+			mulOperation(numbers)
+		default:
+			fmt.Println("massive error")
+			os.Exit(3)
+		}
+		//fmt.Println(numbers[0], numbers[1], operation)
+	}*/
 
 }
 
@@ -114,6 +89,22 @@ func getInput(message string) (string, error) {
 	fmt.Print(message)
 	toRetrun, err := reader.ReadString('\n')
 	return strings.TrimSpace(toRetrun), err
+}
+
+func scrutInput(message string) float64 {
+	n, err := getInput(message)
+
+	if err != nil {
+		fmt.Println("there was a fatal problem")
+		os.Exit(3)
+	}
+	nn, err2 := strconv.ParseFloat(n, 64)
+	if err2 != nil {
+		fmt.Println("The value must be a number")
+		//promptFirst()
+	}
+	return nn
+
 }
 
 func main() {
