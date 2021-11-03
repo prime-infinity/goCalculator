@@ -28,11 +28,19 @@ func performNext() {
 		enterOperation()
 	case "A", "a":
 		fmt.Println("you are performing another calculation")
+		promptFirst()
 	case "H", "h":
-		fmt.Println("you are looking for history not available yet")
+		fmt.Println("you are looking at history")
+		showHistory()
 	default:
 		fmt.Println("enter a valid answer")
 		performNext()
 	}
 
+}
+
+func showHistory() {
+	for index, _ := range n1 {
+		fmt.Println(n1[index], ops[index], n2[index], " = ", results[index])
+	}
 }
