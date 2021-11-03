@@ -55,6 +55,7 @@ func promptSecond() {
 
 func giveResults() {
 	fmt.Println(results[len(results)-1])
+	performNext()
 }
 
 func promptFirst() {
