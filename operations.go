@@ -24,6 +24,8 @@ func performNext() {
 	switch o {
 	case "X", "x":
 		fmt.Println("you are performing calculation on result")
+		n1 = append(n1, results[len(results)-1])
+		enterOperation()
 	case "A", "a":
 		fmt.Println("you are performing another calculation")
 	case "H", "h":
