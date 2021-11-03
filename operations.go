@@ -1,44 +1,21 @@
 package main
 
-import (
-	"bufio"
-	"fmt"
-	"os"
-)
+func performOperation(n1 float64, n2 float64, ops string) float64 {
 
-func addOperation(n []float64) {
-
-	r := n[0] + n[1]
-	results = append(results, r)
-	giveResults(r)
+	switch ops {
+	case "+":
+		return n1 + n2
+	case "/":
+		return n1 / n2
+	case "-":
+		return n1 - n2
+	case "*":
+		return n1 * n2
+	}
+	return 0
 }
 
-func subOperation(n []float64) {
-	r := n[0] - n[1]
-	results = append(results, r)
-	giveResults(r)
-}
-
-func divOperation(n []float64) {
-	r := n[0] / n[1]
-	results = append(results, r)
-	giveResults(r)
-}
-
-func mulOperation(n []float64) {
-	r := n[0] * n[1]
-	results = append(results, r)
-	giveResults(r)
-}
-
-func giveResults(r float64) {
-	fmt.Println(numbers[0], operations[0], numbers[1], " = ", results[0])
-
-	performNext()
-
-}
-
-func performNext() {
+/*func performNext() {
 	reader := bufio.NewReader(os.Stdin)
 	o, err := readInput("press X to perform calculation on result, A to perform another calculation, press H for calculation history: ", reader)
 	if err != nil {
@@ -59,4 +36,4 @@ func performNext() {
 		performNext()
 	}
 
-}
+}*/

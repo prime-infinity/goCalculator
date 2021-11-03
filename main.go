@@ -42,46 +42,27 @@ func enterOperation() {
 
 func promptSecond() {
 
-	returnNumber := scrutInput("enter second number: ")
+	returnNumber := scrutInput("enter second number: ", 2)
 	n2 = append(n2, returnNumber)
-	fmt.Println(n1, n2, ops)
 
+	len := len(n1) - 1
+
+	result := performOperation(n1[len], n2[len], ops[len])
+
+	results = append(results, result)
+	giveResults()
+}
+
+func giveResults() {
+	fmt.Println(results[len(results)-1])
 }
 
 func promptFirst() {
 
-	returnNumber := scrutInput("enter first number: ")
+	returnNumber := scrutInput("enter first number: ", 1)
 
 	n1 = append(n1, returnNumber)
 	enterOperation()
-
-	/*numbers = append(numbers, nn) //appending number to slice
-
-	if len(numbers) == 1 {
-		//this is condition for first time
-		enterOperation()
-	}
-	if len(numbers) == 2 {
-		switch operation {
-		case "+":
-			operations = append(operations, operation) //push this operation into array
-			addOperation(numbers)
-		case "-":
-			operations = append(operations, operation)
-			subOperation(numbers)
-		case "/":
-			operations = append(operations, operation)
-			divOperation(numbers)
-		case "*":
-			operations = append(operations, operation)
-			mulOperation(numbers)
-		default:
-			fmt.Println("massive error")
-			os.Exit(3)
-		}
-		//fmt.Println(numbers[0], numbers[1], operation)
-	}*/
-
 }
 
 func getInput(message string) (string, error) {
@@ -91,7 +72,7 @@ func getInput(message string) (string, error) {
 	return strings.TrimSpace(toRetrun), err
 }
 
-func scrutInput(message string) float64 {
+func scrutInput(message string, step int) float64 {
 	n, err := getInput(message)
 
 	if err != nil {
@@ -101,7 +82,13 @@ func scrutInput(message string) float64 {
 	nn, err2 := strconv.ParseFloat(n, 64)
 	if err2 != nil {
 		fmt.Println("The value must be a number")
-		//promptFirst()
+		if step == 1 {
+			promptFirst()
+		}
+		if step == 2 {
+			promptSecond()
+		}
+
 	}
 	return nn
 
