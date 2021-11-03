@@ -8,18 +8,16 @@ import (
 	"strings"
 )
 
-//the numbers, results and opetations all stored in respective slices
-var numbers = []float64{}
+//the first and second set of numbers,
+//operations and results are all stored in their respective slices
+var n1 = []float64{}
+var n2 = []float64{}
+var ops = []string{} //operations
 var results = []float64{}
-var operations = []string{}
-
-var operation string
-var counter int = 0 //counter to count the operation
 
 func enterOperation() {
 
-	reader := bufio.NewReader(os.Stdin)
-	o, err := readInput("enter operation ( +, - , / , * ): ", reader)
+	o, err := getInput("enter operation ( +, - , / , * ): ")
 
 	if err != nil {
 		fmt.Println("there was a fatal problem")
@@ -28,43 +26,42 @@ func enterOperation() {
 
 	switch o {
 	case "+":
-		operation = "+"
-		prompt()
+		ops = append(ops, "+")
 	case "-":
-		operation = "-"
-		prompt()
+		ops = append(ops, "-")
 	case "*":
-		operation = "*"
-		prompt()
+		ops = append(ops, "*")
 	case "/":
-		operation = "/"
-		prompt()
+		ops = append(ops, "/")
 	default:
 		fmt.Println("your operation was not valid")
 		enterOperation()
 	}
+	promptSecond()
 }
 
-func prompt() {
+func promptSecond() {
 
-	counter++ //increment counter
+	n, err := getInput("enter second number: ")
+	if err != nil {
+		fmt.Println("there was a fatal problem")
+		os.Exit(3)
+	}
+	nn, err2 := strconv.ParseFloat(n, 64)
 
-	var opTalk string
-
-	//this below part can be improved later using slice, by saving them in slice and iterating
-	switch counter {
-	case 1:
-		opTalk = "first"
-	case 2:
-		opTalk = "second"
-	case 3:
-		opTalk = "third"
-	default:
-		opTalk = "next"
+	if err2 != nil {
+		fmt.Println("The value must be a number")
+		promptFirst()
+	} else {
+		n2 = append(n2, nn)
+		fmt.Println(n1, n2, ops)
 	}
 
-	reader := bufio.NewReader(os.Stdin)
-	n, err := readInput("enter "+opTalk+" number: ", reader)
+}
+
+func promptFirst() {
+
+	n, err := getInput("enter first number: ")
 
 	if err != nil {
 		fmt.Println("there was a fatal problem")
@@ -75,9 +72,13 @@ func prompt() {
 
 	if err2 != nil {
 		fmt.Println("The value must be a number")
-		prompt()
+		promptFirst()
 	} else {
-		numbers = append(numbers, nn) //appending number to slice
+
+		n1 = append(n1, nn)
+		enterOperation()
+
+		/*numbers = append(numbers, nn) //appending number to slice
 
 		if len(numbers) == 1 {
 			//this is condition for first time
@@ -102,24 +103,21 @@ func prompt() {
 				os.Exit(3)
 			}
 			//fmt.Println(numbers[0], numbers[1], operation)
-		}
+		}*/
 
-		if len(numbers) > 2 {
-			enterOperation()
-		}
 	}
 
 }
 
-func readInput(message string, r *bufio.Reader) (string, error) {
+func getInput(message string) (string, error) {
+	reader := bufio.NewReader(os.Stdin)
 	fmt.Print(message)
-	toRetrun, err := r.ReadString('\n')
+	toRetrun, err := reader.ReadString('\n')
 	return strings.TrimSpace(toRetrun), err
 }
 
 func main() {
 
-	prompt()
-	//fmt.Printf("%T,%v", numbers, numbers)
+	promptFirst()
 
 }
